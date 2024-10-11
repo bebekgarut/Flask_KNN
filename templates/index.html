@@ -3,23 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>KNN Classifier</title>
 </head>
 <body>
-    <h1>
-        test flask
-        {{ valu }}
-    </h1>
-    {% if valu == "a" %}
-    <h1>anjau</h1>
+    <h1>KNN Classifier</h1>
+    <div>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <label for="train_file">Upload Training File (CSV):</label>
+        <input type="file" name="train_file" placeholder="text" required><br><br>
+
+        <label for="test_file">Upload Testing File (CSV):</label>
+        <input type="file" name="test_file" placeholder="input file csv" required><br><br>
+
+        <label for="k_value">Enter K value:</label>
+        <input type="number" name="k_value" min="1" placeholder="input k" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div>
+    {% if result %}
+        <h2>Result</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Prediction</th>
+                    <th>Actual Label</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pred, actual in zip(result.predictions, result.actual_labels) %}
+                <tr>
+                    <td>{{ pred }}</td>
+                    <td>{{ actual }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% endif %}
-
-
-        {% for data in arr %}
-        <li>{{ data }}</li>
-        {% endfor %}
-       
-
-    
+</div>
 </body>
 </html>
