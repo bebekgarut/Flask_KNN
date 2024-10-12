@@ -3,27 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href=" {{ url_for('static', filename='main.css') }}">
+   
     <title>KNN Classifier</title>
 </head>
 <body>
     <h1>KNN Classifier</h1>
+    
     <div>
-    <form action="/" method="POST" enctype="multipart/form-data">
-        <label for="train_file">Upload Training File (CSV):</label>
-        <input type="file" name="train_file" placeholder="text" required><br><br>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="train_file">Upload Training File (CSV):</label>
+            <input type="file" name="train_file" placeholder="text" required><br><br>
 
-        <label for="test_file">Upload Testing File (CSV):</label>
-        <input type="file" name="test_file" placeholder="input file csv" required><br><br>
+            <label for="test_file">Upload Testing File (CSV):</label>
+            <input type="file" name="test_file" placeholder="input file csv" required><br><br>
 
-        <label for="k_value">Enter K value:</label>
-        <input type="number" name="k_value" min="1" placeholder="input k" required><br><br>
+            <label for="k_value">Enter K value:</label>
+            <input type="number" name="k_value" min="1" placeholder="input k" required><br><br>
 
-        <button type="submit">Submit</button>
-    </form>
-</div>
+        <button class="p-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit">Submit</button>
+         </form>
+    </div>
 
-<div>
-    {% if result %}
+    <div class="container text-center">
+        <div class="row row-cols-2">
+            <div class="col overflow-auto border kotak-fix">
+                <h3>Training Data</h3>
+                {% if training_data is not none %}
+                <table border="1">
+                    <!-- <thead>
+                        <tr>
+                            {% for col in training_data.columns %}
+                                <th>{{ col }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead> -->
+                    <tbody>
+                        {% for row in training_data.values %}
+                            <tr>
+                                {% for value in row %}
+                                    <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>No training data uploaded.</p>
+                {% endif %}
+            </div>
+
+            <div class="col overflow-auto border kotak-fix">
+                <h3>Testing Data</h3>
+                {% if testing_data is not none %}
+                <table border="1">
+                    <!-- <thead>
+                        <tr>
+                        {% for col in testing_data.columns %}
+                            <th>{{ col }}</th>
+                        </tr>
+                        {% endfor %}
+                    </thead> -->
+                    <tbody>
+                        {% for row in testing_data.values %}
+                            <tr>
+                                {% for value in row %}
+                                    <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p>No testing data uploaded.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col overflow-auto border kotak-fix">
+            {% if result %}
         <h2>Result</h2>
         <table border="1">
             <thead>
@@ -41,7 +103,22 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
+    </div>
+
+    <div class="row align-items-center"> 
+        <div class="col-sm-5 border align-items-center">
+            <h2>Metrik Evaluasi</h2>
+    <ul>
+        <li>Akurasi: {{ result['accuracy'] * 100 }} %</li>
+        <li>Presisi: {{ result['precision'] * 100 }} %</li>
+        <li>Recall: {{ result['recall'] * 100 }} %</li>
+        <li>F1 Score: {{ result['f1_score'] * 100 }} %</li>
+    </ul>
+</div>
+    </div>
     {% endif %}
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
