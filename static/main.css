@@ -1,8 +1,19 @@
 body{
-    background-color:darkgrey;
+    background-color:#e8f5e9;
 }
 
 .kotak-fix{
     height: 300px;
     overflow-y: auto;
+    background-color: #c8e6c9;
+    border-radius: 5%;
+}
+
+.input{
+    color: #000;
+    background-color: #ffffff;
+}
+
+.no-p{
+    min-height: 190px;
 }

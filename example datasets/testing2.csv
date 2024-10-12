@@ -1,10 +1,1 @@
-usual,proper,complete,1,critical,convenient,slightly_prob,not_recom,not_recom
-usual,proper,complete,1,critical,convenient,problematic,recommended,priority
-usual,proper,complete,1,critical,convenient,problematic,priority,priority
-usual,proper,complete,3,convenient,convenient,slightly_prob,recommended,very_recom
-usual,proper,complete,3,convenient,convenient,slightly_prob,priority,priority
-usual,proper,complete,1,convenient,convenient,nonprob,recommended,recommend
-usual,critical,complete,2,critical,inconv,problematic,recommended,spec_prior
-usual,critical,complete,2,critical,inconv,problematic,priority,spec_prior
-usual,critical,complete,2,critical,inconv,slightly_prob,recommended,priority
-usual,critical,complete,2,critical,inconv,slightly_prob,priority,spec_prior
+usual,less_proper,foster,more,critical,inconv,problematic,not_recom,not_recom

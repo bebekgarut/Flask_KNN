@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report, accuracy_score
+from sklearn.preprocessing import OneHotEncoder
 
 app = Flask(__name__)
 
@@ -15,21 +16,39 @@ def knn_classification(train_data, test_data, k):
     X_test = test_data.iloc[:, :-1]  # Atribut Testing
     y_test = test_data.iloc[:, -1]   # Label Testing
 
-    # Konversi ke numeric
-    label_encoders = {}
-    for column in X_train.columns:
-        if X_train[column].dtype == 'object':  #
-            le = LabelEncoder()
-            X_train[column] = le.fit_transform(X_train[column])
-            X_test[column] = le.transform(X_test[column])
-            label_encoders[column] = le
+      # Cek tipe data dan missing values
+    print("Train Data Types:")
+    print(X_train.dtypes)
+    print("Test Data Types:")
+    print(X_test.dtypes)
 
-    # training model
-    knn = KNeighborsClassifier(n_neighbors=k)
-    knn.fit(X_train, y_train)
+    print("Missing values in Train Data:")
+    print(X_train.isnull().sum())
+    print("Missing values in Test Data:")
+    print(X_test.isnull().sum())
+
+    # Isi missing values jika ada
+    X_train.fillna(method='ffill', inplace=True)
+    X_test.fillna(method='ffill', inplace=True)
+
+    print("Train Data Columns:")
+    print(X_train.columns)
+    print("Test Data Columns:")
+    print(X_test.columns)
+
+    # Konversi ke OneHotEncoder (hanya untuk kolom non-numeric)
+    onehot_enc = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
+
+    # Mengaplikasikan OneHotEncoder hanya pada kolom non-numeric
+    X_train_encoded = onehot_enc.fit_transform(X_train)
+    X_test_encoded = onehot_enc.transform(X_test)
+
+    # Training model
+    knn = KNeighborsClassifier(n_neighbors=k, metric='hamming')
+    knn.fit(X_train_encoded, y_train)
 
     # Prediksi
-    predictions = knn.predict(X_test)
+    predictions = knn.predict(X_test_encoded)
 
     accuracy = accuracy_score(y_test, predictions)
     report = classification_report(y_test, predictions, output_dict=True)
@@ -51,8 +70,8 @@ def index():
         k_value = int(request.form['k_value'])
 
         try:
-            train_data = pd.read_csv(train_file)
-            test_data = pd.read_csv(test_file)
+            train_data = pd.read_csv(train_file, header=None)
+            test_data = pd.read_csv(test_file, header=None)
         except Exception as e:
             return f"Error reading files: {str(e)}", 400
 
