@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report, accuracy_score
 from sklearn.preprocessing import OneHotEncoder
 
