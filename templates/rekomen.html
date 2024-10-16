@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='img/knn.png')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Rowdies:wght@300;400;700&amp;
+    family=Spicy+Rice&amp;family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href=" {{ url_for('static', filename='main.css') }}">
+   
+    <title>KNN Classifier</title>
+</head>
+<body>
+    <div class="container text-center">
+        <div class="row mt-3 mb-3">
+            <h1 class="nama-aplikasi">Prediksi Penerimaan Siswa TK</h1>
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+            <div class="col-md-6 w-100">
+                <div class="col overflow-auto kotak-fix" style="height:450px;">
+                    <h3 class="judul-tabel p-2 mt-1">Input Opsi-opsi Berikit Ini</h3>
+                    <div class="row m-3">
+                        <!-- Kiri -->
+                        <div class="col-md-6">
+                            <label for="select1" class="label-select text-start d-block mb-2">Status Orang Tua</label>
+                            <select id="select1" class="form-select mb-3">
+                                <option value="" disabled selected>Pilih status sosial orang tua</option>
+                                <option value="usual">Orang tua dengan status sosial biasa</option>
+                                <option value="pretentious">Orang tua dengan status sosial menengah</option>
+                                <option value="great_pret">Orang tua dengan status sosial tinggi</option>
+                            </select>
+        
+                            <label for="select2" class="label-select text-start d-block mb-2">Kebutuhan Perawatan Anak</label>
+                            <select id="select2" class="form-select mb-3">
+                                <option value="" disabled selected>Pilih Kebutuhan Perawatan Anak</option>
+                                <option value="proper">Anak telah mendapatkan perawatan yang memadai</option>
+                                <option value="less_proper"> Anak mendapatkan perawatan yang kurang memadai</option>
+                                <option value="improper">Anak tidak mendapatkan perawatan yang memadai</option>
+                                <option value="critical">Anak dalam kondisi kritis, memerlukan perawatan mendesak</option>
+                                <option value="very_crit">Anak dalam kondisi yang sangat kritis, membutuhkan perhatian khusus</option>
+                            </select>
+        
+                            <label for="select3" class="label-select text-start d-block mb-2">Kondisi Keluarga</label>
+                            <select id="select3" class="form-select mb-3">
+                                <option value="" disabled selected>Pilih Kondisi Keluarga</option>
+                                <option value="complete">Keluarga Lengkap</option>
+                                <option value="completed">Keluarga lengkap tapi orang tua bercerai</option>
+                                <option value="incomplete">Keluarga tidak lengkap</option>
+                                <option value="foster">Anak diasuh oleh orang lain</option>
+                            </select>
+        
+                            <label for="select4" class="label-select text-start d-block mb-2">Jumlah anak yang ada di keluarga</label>
+                            <select id="select4" class="form-select mb-3">
+                                <option value="" disabled selected>Pilih jumlah anak</option>
+                                <option value="1">Satu Anak</option>
+                                <option value="2">Dua Anak</option>
+                                <option value="3">Tiga Anak</option>
+                                <option value="more">Lebih Dari Tiga Anak</option>
+                            </select>
+                        </div>
+        
+                        <!-- Kanan -->
+                        <div class="col-md-6">
+                            <label for="select5" class="label-select text-start d-block mb-2">Kondisi perumahan</label>
+                            <select id="select5" class="form-select mb-3">
+                                <option value="" disabled selected>Pilih Kondisi perumahan</option>
+                                <option value="convenient">Perumahan yang nyaman</option>
+                                <option value="less_conv">Perumahan yang kurang nyaman</option>
+                                <option value="critical">Perumahan dalam kondisi kritis atau buruk</option>
+                            </select>
+        
+                            <label for="select6" class="label-select text-start d-block mb-2">Kondisi keuangan keluarga</label>
+                            <select id="select6" class="form-select mb-3">
+                                <option value="" disabled selected>Pilih Kondisi keuangan keluarga</option>
+                                <option value="convenient">Keuangan stabil</option>
+                                <option value="inconv">Keuangan tidak stabil atau dalam kondisi kesulitan</option>
+                            </select>
+        
+                            <label for="select7" class="label-select text-start d-block mb-2">Masalah sosial yang mungkin dihadapi keluarga</label>
+                            <select id="select7" class="form-select mb-3">
+                                <option value="" disabled selected>Pilih Kondisi Masalah sosial</option>
+                                <option value="non-prob">Tidak ada masalah sosial</option>
+                                <option value="slightly_prob">Masalah sosial ringan</option>
+                                <option value="problematic">Masalah sosial yang cukup serius</option>
+                            </select>
+        
+                            <label for="select8" class="label-select text-start d-block mb-2">Kesehatan anak</label>
+                            <select id="select8" class="form-select mb-3">
+                                <option value="" disabled selected>Pilih Kesehatan anak</option>
+                                <option value="recommended">Anak dalam kondisi kesehatan baik</option>
+                                <option value="priority">Anak memiliki kebutuhan prioritas kesehatan</option>
+                                <option value="not_recom">Kondisi kesehatan anak tidak direkomendasikan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="d-flex justify-content-center mb-3">
+            <div class="kotak-fix" style="height: 160px; width: 500px;">
+                <h2 class="judul-tabel  mt-3">Hail Prediksi</h2>
+            </div>
+        </div>
+            
+    </div>
+    <div class="overlay"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

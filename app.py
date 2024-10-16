@@ -89,5 +89,9 @@ def index():
 
     return render_template('index.html', result=result, training_data=training_data, testing_data = testing_data, zip=zip)
 
+@app.route("/option")
+def option():
+    return render_template('rekomen.html')
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

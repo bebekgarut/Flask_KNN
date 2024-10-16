@@ -21,3 +21,5 @@ pretentious,critical,completed,3,less_conv,inconv,problematic,not_recom,not_reco
 usual,very_crit,complete,1,convenient,convenient,nonprob,recommended,priority
 usual,less_proper,foster,2,critical,convenient,nonprob,not_recom,not_recom
 usual,less_proper,foster,2,critical,convenient,slightly_prob,recommended,priority
+great_pret,very_crit,foster,more,convenient,inconv,nonprob,priority,spec_prior
+great_pret,very_crit,foster,more,convenient,inconv,nonprob,not_recom,not_recom
