@@ -6,8 +6,11 @@ from sklearn.preprocessing import OneHotEncoder
 
 app = Flask(__name__)
 
-# fungsi hitung knn
+knn = None
+onehot_enc = None
+
 def knn_classification(train_data, test_data, k):
+    global knn, onehot_enc
     
     X_train = train_data.iloc[:, :-1]  # Atribut Training
     y_train = train_data.iloc[:, -1]   # Label Traning
@@ -15,44 +18,19 @@ def knn_classification(train_data, test_data, k):
     X_test = test_data.iloc[:, :-1]  # Atribut Testing
     y_test = test_data.iloc[:, -1]   # Label Testing
 
-      # Cek tipe data dan missing values
-    print("Train Data Types:")
-    print(X_train.dtypes)
-    print("Test Data Types:")
-    print(X_test.dtypes)
-
-    print("Missing values in Train Data:")
-    print(X_train.isnull().sum())
-    print("Missing values in Test Data:")
-    print(X_test.isnull().sum())
-
-    # Isi missing values jika ada
-    X_train.fillna(method='ffill', inplace=True)
-    X_test.fillna(method='ffill', inplace=True)
-
-    print("Train Data Columns:")
-    print(X_train.columns)
-    print("Test Data Columns:")
-    print(X_test.columns)
-
-    # Konversi ke OneHotEncoder (hanya untuk kolom non-numeric)
     onehot_enc = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
 
-    # Mengaplikasikan OneHotEncoder hanya pada kolom non-numeric
     X_train_encoded = onehot_enc.fit_transform(X_train)
     X_test_encoded = onehot_enc.transform(X_test)
 
-    # Training model
-    knn = KNeighborsClassifier(n_neighbors=k, metric='hamming')
+    knn = KNeighborsClassifier(n_neighbors=k)
     knn.fit(X_train_encoded, y_train)
 
-    # Prediksi
     predictions = knn.predict(X_test_encoded)
 
     accuracy = accuracy_score(y_test, predictions)
     report = classification_report(y_test, predictions, output_dict=True)
 
-    # Return prediksi dan label testing
     return predictions, y_test.values, accuracy, report
 
 
@@ -89,9 +67,34 @@ def index():
 
     return render_template('index.html', result=result, training_data=training_data, testing_data = testing_data, zip=zip)
 
-@app.route("/option")
+@app.route("/option", methods=['GET', 'POST'])
 def option():
-    return render_template('rekomen.html')
+    prediction = None
+    if request.method == 'POST':
+        status_sosial = request.form.get('status_sosial')
+        perawatan = request.form.get('perawatan')
+        kondisi_keluarga = request.form.get('kondisi_keluarga')
+        jumlah_anak = request.form.get('jumlah_anak')
+        perumahan = request.form.get('perumahan')
+        keuangan = request.form.get('keuangan')
+        masalah_sosial = request.form.get('masalah_sosial')
+        kesehatan = request.form.get('kesehatan')
+        
+        # print(f"Status Sosial: {status_sosial}, Perawatan: {perawatan}, Kondisi Keluarga: {kondisi_keluarga}, Jumlah Anak: {jumlah_anak}, Perumahan: {perumahan}, Keuangan: {keuangan}, Masalah Sosial: {masalah_sosial}, Kesehatan: {kesehatan}")
+
+        input_data = pd.DataFrame([[status_sosial, perawatan, kondisi_keluarga, jumlah_anak, 
+                                    perumahan, keuangan, masalah_sosial, kesehatan]])
+
+        input_encoded = onehot_enc.transform(input_data)
+
+        # print(f"Input Encoded: {input_encoded}")
+
+        prediction = knn.predict(input_encoded)[0]
+
+        # print(f"Prediction: {prediction}")
+
+    return render_template('rekomen.html', prediction=prediction)
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

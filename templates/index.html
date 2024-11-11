@@ -1,136 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="{{url_for('static', filename='img/knn.png')}}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Rowdies:wght@300;400;700&amp;
-    family=Spicy+Rice&amp;family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href=" {{ url_for('static', filename='main.css') }}">
-   
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{url_for('static', filename='img/knn.png')}}"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Rowdies:wght@300;400;700&amp;
+    family=Spicy+Rice&amp;family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href=" {{ url_for('static', filename='main.css') }}"
+    />
+
     <title>KNN Classifier</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container text-center">
-        <div class="row mt-5">
-            <h1 class="nama-aplikasi">KNN Classifier</h1>
+      <div class="row mt-5">
+        <h1 class="nama-aplikasi">KNN Classifier</h1>
+      </div>
+
+      <form class="mt-3" method="POST" enctype="multipart/form-data">
+        <div class="row justify-content-center mx-1">
+          <div class="col">
+            <label for="train_file" class="upload mb-2"
+              >Upload Training File (CSV):</label
+            >
+            <input
+              type="file"
+              class="input p-2 rounded-3 w-75 form-control mx-auto"
+              style="border: 3px solid #523953"
+              name="train_file"
+              placeholder="text"
+              required
+            />
+          </div>
+          <div class="col">
+            <label for="test_file" class="upload mb-2"
+              >Upload Testing File (CSV):</label
+            >
+            <input
+              type="file"
+              class="input p-2 rounded-3 w-75 form-control mx-auto"
+              style="border: 3px solid #523953"
+              name="test_file"
+              placeholder="input file csv"
+              required
+            />
+          </div>
         </div>
-
-        <form class="mt-3" method="POST" enctype="multipart/form-data">
-            <div class="row justify-content-center mx-1">
-                <div class="col">
-                    <label for="train_file" class="upload mb-2">Upload Training File (CSV):</label>
-                    <input type="file" class="input p-2 rounded-3 w-75 form-control mx-auto" 
-                    style="border: 3px solid #523953;" name="train_file" placeholder="text" required>
-                </div>
-                <div class="col">
-                    <label for="test_file" class="upload mb-2">Upload Testing File (CSV):</label>
-                    <input type="file" class="input p-2 rounded-3 w-75 form-control mx-auto"  
-                    style="border: 3px solid #523953;" name="test_file" placeholder="input file csv" required>
-                </div>   
-            </div>
-            <div class="row mt-3">
-                <div class="col row-cols-1">
-                    <label for="k_value" class="upload mb-2">Masukkan Nilai K:</label>
-                    <input type="number" class="input p-2 rounded-3 w-25"  
-                    style="border: 3px solid #523953;" name="k_value" min="1" placeholder="input k" required><br><br>
-                    <button class="submitt p-2 w-25 rounded-3 mb-3" type="submit">Submit</button>
-                </div>  
-            </div>      
-        </form>
-        <br>
-
-        <div class="row mb-3 g-3">
-            <div class="col overflow-auto kotak-fix">
-                <h3 class="judul-tabel p-2 mt-3">Training Data</h3>
-                <div class="tabel-scroll">
-                    {% if training_data is not none %}
-                    <table class="table table-striped table-hover table-dark">
-                        <tbody>
-                            {% for row in training_data.values %}
-                                <tr>
-                                    {% for value in row %}
-                                        <td>{{ value }}</td>
-                                    {% endfor %}
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                        <p class="d-flex justify-content-center align-items-center no-p">No training data uploaded.</p>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="col overflow-auto kotak-fix">
-                <h3 class="judul-tabel p-2 mt-3">Testing Data</h3>
-                <div class="tabel-scroll">
-                    {% if testing_data is not none %}
-                    <table class="table table-striped table-hover table-dark">
-                        <tbody>
-                            {% for row in testing_data.values %}
-                                <tr>
-                                    {% for value in row %}
-                                        <td>{{ value }}</td>
-                                    {% endfor %}
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                    <p class="d-flex justify-content-center align-items-center no-p">No testing data uploaded.</p>
-                    {% endif %}
-                </div>
-            </div>
+        <div class="row mt-3">
+          <div class="col row-cols-1">
+            <label for="k_value" class="upload mb-2">Masukkan Nilai K:</label>
+            <input
+              type="number"
+              class="input p-2 rounded-3 w-25"
+              style="border: 3px solid #523953"
+              name="k_value"
+              min="1"
+              placeholder="input k"
+              required
+            /><br /><br />
+            <button class="submitt p-2 w-25 rounded-3 mb-3" type="submit">
+              Submit
+            </button>
+          </div>
         </div>
+      </form>
+      <br />
 
-        <br>
-            <div class="d-flex justify-content-center mb-3">
-                <div class="col-md-6 w-75">
-                    {% if result %}
-                    <div class="col overflow-auto kotak-fix" style="height: 400px;">
-                        <h2 class="judul-tabel p-2  mt-3">Result</h2>
-                        <div class="tabel-scroll d-flex justify-content-center">
-                            <table class="table table-striped table-hover table-dark" style="margin:15px;">
-                                <thead>
-                                    <tr>
-                                        <th>Prediction</th>
-                                        <th>Actual Label</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for pred, actual in zip(result.predictions, result.actual_labels) %}
-                                    <tr>
-                                        <td>{{ pred }}</td>
-                                        <td>{{ actual }}</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <br>
-
-        <div class="d-flex justify-content-center mb-3">
-            <div class="kotak-fix" style="height: 260px; width: 500px;">
-                <h2 class="judul-tabel  mt-3">Metrik Evaluasi</h2>
-                <div class="d-flex justify-content-center">
-                    <ul class="list-group" style="width: 80%; margin: 15px;">
-                        <li class="list-group-item">Akurasi: {{ result['accuracy'] * 100 }} %</li>
-                        <li class="list-group-item">Presisi: {{ result['precision'] * 100 }} %</li>
-                        <li class="list-group-item">Recall: {{ result['recall'] * 100 }} %</li>
-                        <li class="list-group-item">F1 Score: {{ result['f1_score'] * 100 }} %</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <button class="submitt p-2 w-25 rounded-3 mb-3" type="submit">Lakukan Prediksi</button>
+      <div class="row mb-3 g-3">
+        <div class="col overflow-auto kotak-fix">
+          <h3 class="judul-tabel p-2 mt-3">Training Data</h3>
+          <div class="tabel-scroll">
+            {% if training_data is not none %}
+            <table class="table table-striped table-hover table-dark">
+              <tbody>
+                {% for row in training_data.values %}
+                <tr>
+                  {% for value in row %}
+                  <td>{{ value }}</td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <p class="d-flex justify-content-center align-items-center no-p">
+              No training data uploaded.
+            </p>
             {% endif %}
+          </div>
+        </div>
+
+        <div class="col overflow-auto kotak-fix">
+          <h3 class="judul-tabel p-2 mt-3">Testing Data</h3>
+          <div class="tabel-scroll">
+            {% if testing_data is not none %}
+            <table class="table table-striped table-hover table-dark">
+              <tbody>
+                {% for row in testing_data.values %}
+                <tr>
+                  {% for value in row %}
+                  <td>{{ value }}</td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <p class="d-flex justify-content-center align-items-center no-p">
+              No testing data uploaded.
+            </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <div class="d-flex justify-content-center mb-3">
+        <div class="col-md-6 w-75">
+          {% if result %}
+          <div class="col overflow-auto kotak-fix" style="height: 400px">
+            <h2 class="judul-tabel p-2 mt-3">Result</h2>
+            <div class="tabel-scroll d-flex justify-content-center">
+              <table
+                class="table table-striped table-hover table-dark"
+                style="margin: 15px"
+              >
+                <thead>
+                  <tr>
+                    <th>Prediction</th>
+                    <th>Actual Label</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for pred, actual in zip(result.predictions,
+                  result.actual_labels) %}
+                  <tr>
+                    <td>{{ pred }}</td>
+                    <td>{{ actual }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <div class="d-flex justify-content-center mb-3">
+        <div class="kotak-fix" style="height: 260px; width: 500px">
+          <h2 class="judul-tabel mt-3">Metrik Evaluasi</h2>
+          <div class="d-flex justify-content-center">
+            <ul class="list-group" style="width: 80%; margin: 15px">
+              <li class="list-group-item">
+                Akurasi: {{ result['accuracy'] * 100 }} %
+              </li>
+              <li class="list-group-item">
+                Presisi: {{ result['precision'] * 100 }} %
+              </li>
+              <li class="list-group-item">
+                Recall: {{ result['recall'] * 100 }} %
+              </li>
+              <li class="list-group-item">
+                F1 Score: {{ result['f1_score'] * 100 }} %
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <a href="/option" class="submitt p-2 w-25 rounded-3 mb-3" type="submit"
+        >Lakukan Prediksi</a
+      >
+      {% endif %}
     </div>
     <div class="overlay"></div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

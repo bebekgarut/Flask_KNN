@@ -1,7 +1,4 @@
-great_pret,critical,incomplete,1,convenient,inconv,slightly_prob,not_recom,not_recom
-great_pret,critical,incomplete,1,convenient,inconv,slightly_prob,not_recom,not_recom
-great_pret,critical,incomplete,1,convenient,inconv,problematic,not_recom,not_recom
-great_pret,critical,incomplete,1,less_conv,inconv,nonprob,not_recom,not_recom
+pretentious,critical,completed,3,less_conv,inconv,problematic,priority,spec_prior
 great_pret,critical,incomplete,1,less_conv,inconv,slightly_prob,recommended,priority
 pretentious,less_proper,completed,3,less_conv,convenient,problematic,recommended,priority
 pretentious,less_proper,completed,3,less_conv,convenient,problematic,priority,priority
@@ -16,7 +13,6 @@ pretentious,less_proper,completed,3,less_conv,inconv,problematic,recommended,pri
 pretentious,less_proper,completed,3,less_conv,inconv,problematic,priority,priority
 pretentious,less_proper,completed,3,less_conv,inconv,problematic,not_recom,not_recom
 usual,proper,complete,1,convenient,inconv,problematic,priority,priority
-pretentious,critical,completed,3,less_conv,inconv,problematic,priority,spec_prior
 pretentious,critical,completed,3,less_conv,inconv,problematic,not_recom,not_recom
 usual,very_crit,complete,1,convenient,convenient,nonprob,recommended,priority
 usual,less_proper,foster,2,critical,convenient,nonprob,not_recom,not_recom
