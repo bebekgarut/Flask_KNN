@@ -66,19 +66,19 @@
                     <option value="" disabled {% if not request.form.perawatan %}selected{% endif %}>
                       Pilih Kebutuhan Perawatan Anak
                     </option>
-                    <option value="proper" {% if request.form.perawatan == 'usual' %}selected{% endif %}>
+                    <option value="proper" {% if request.form.perawatan == 'proper' %}selected{% endif %}>
                       Anak telah mendapatkan perawatan yang memadai
                     </option>
-                    <option value="less_proper" {% if request.form.perawatan == 'usual' %}selected{% endif %}>
+                    <option value="less_proper" {% if request.form.perawatan == 'less_proper' %}selected{% endif %}>
                       Anak mendapatkan perawatan yang kurang memadai
                     </option>
-                    <option value="improper" {% if request.form.perawatan == 'usual' %}selected{% endif %}>
+                    <option value="improper" {% if request.form.perawatan == 'improper' %}selected{% endif %}>
                       Anak tidak mendapatkan perawatan yang memadai
                     </option>
-                    <option value="critical" {% if request.form.perawatan == 'usual' %}selected{% endif %}>
+                    <option value="critical" {% if request.form.perawatan == 'critical' %}selected{% endif %}>
                       Anak dalam kondisi kritis, memerlukan perawatan mendesak
                     </option>
-                    <option value="very_crit" {% if request.form.status_sosial == 'usual' %}selected{% endif %}>
+                    <option value="very_crit" {% if request.form.status_sosial == 'very_crit' %}selected{% endif %}>
                       Anak dalam kondisi yang sangat kritis, membutuhkan
                       perhatian khusus
                     </option>
@@ -97,12 +97,12 @@
                     <option value="" disabled {% if not request.form.kondisi_keluarga %}selected{% endif %}>
                       Pilih Kondisi Keluarga
                     </option>
-                    <option value="complete" {% if request.form.kondisi_keluarga == 'usual' %}selected{% endif %}>Keluarga Lengkap</option>
-                    <option value="completed" {% if request.form.kondisi_keluarga == 'usual' %}selected{% endif %}>
+                    <option value="complete" {% if request.form.kondisi_keluarga == 'complete' %}selected{% endif %}>Keluarga Lengkap</option>
+                    <option value="completed" {% if request.form.kondisi_keluarga == 'completed' %}selected{% endif %}>
                       Keluarga lengkap tapi orang tua bercerai
                     </option>
-                    <option value="incomplete" {% if request.form.kondisi_keluarga == 'usual' %}selected{% endif %}>Keluarga tidak lengkap</option>
-                    <option value="foster" {% if request.form.kondisi_keluarga == 'usual' %}selected{% endif %}>Anak diasuh oleh orang lain</option>
+                    <option value="incomplete" {% if request.form.kondisi_keluarga == 'incomplete' %}selected{% endif %}>Keluarga tidak lengkap</option>
+                    <option value="foster" {% if request.form.kondisi_keluarga == 'foster' %}selected{% endif %}>Anak diasuh oleh orang lain</option>
                   </select>
 
                   <label
@@ -118,10 +118,10 @@
                     <option value="" disabled {% if not request.form.jumlah_anak %}selected{% endif %}>
                       Pilih jumlah anak
                     </option>
-                    <option value="1" {% if request.form.jumlah_anak == 'usual' %}selected{% endif %}>Satu Anak</option>
-                    <option value="2" {% if request.form.jumlah_anak == 'usual' %}selected{% endif %}>Dua Anak</option>
-                    <option value="3" {% if request.form.jumlah_anak == 'usual' %}selected{% endif %}>Tiga Anak</option>
-                    <option value="more" {% if request.form.jumlah_anak == 'usual' %}selected{% endif %}>Lebih Dari Tiga Anak</option>
+                    <option value="1" {% if request.form.jumlah_anak == '1' %}selected{% endif %}>Satu Anak</option>
+                    <option value="2" {% if request.form.jumlah_anak == '2' %}selected{% endif %}>Dua Anak</option>
+                    <option value="3" {% if request.form.jumlah_anak == '3' %}selected{% endif %}>Tiga Anak</option>
+                    <option value="more" {% if request.form.jumlah_anak == 'more' %}selected{% endif %}>Lebih Dari Tiga Anak</option>
                   </select>
                 </div>
 
@@ -140,11 +140,11 @@
                     <option value="" disabled {% if not request.form.perumahan %}selected{% endif %}>
                       Pilih Kondisi perumahan
                     </option>
-                    <option value="convenient" {% if request.form.perumahan == 'usual' %}selected{% endif %}>Perumahan yang nyaman</option>
-                    <option value="less_conv" {% if request.form.perumahan == 'usual' %}selected{% endif %}>
+                    <option value="convenient" {% if request.form.perumahan == 'convenient' %}selected{% endif %}>Perumahan yang nyaman</option>
+                    <option value="less_conv" {% if request.form.perumahan == 'less_conv' %}selected{% endif %}>
                       Perumahan yang kurang nyaman
                     </option>
-                    <option value="critical" {% if request.form.perumahan == 'usual' %}selected{% endif %}>
+                    <option value="critical" {% if request.form.perumahan == 'critical' %}selected{% endif %}>
                       Perumahan dalam kondisi kritis atau buruk
                     </option>
                   </select>
@@ -158,8 +158,8 @@
                     <option value="" disabled {% if not request.form.keluarga %}selected{% endif %}>
                       Pilih Kondisi keuangan keluarga
                     </option>
-                    <option value="convenient" {% if request.form.keluarga == 'usual' %}selected{% endif %}>Keuangan stabil</option>
-                    <option value="inconv" {% if request.form.keluarga == 'usual' %}selected{% endif %}>
+                    <option value="convenient" {% if request.form.keluarga == 'convenient' %}selected{% endif %}>Keuangan stabil</option>
+                    <option value="inconv" {% if request.form.keluarga == 'inconv' %}selected{% endif %}>
                       Keuangan tidak stabil atau dalam kondisi kesulitan
                     </option>
                   </select>
@@ -177,9 +177,9 @@
                     <option value="" disabled {% if not request.form.masalah_sosial %}selected{% endif %}>
                       Pilih Kondisi Masalah sosial
                     </option>
-                    <option value="non-prob" {% if request.form.masalah_sosial == 'usual' %}selected{% endif %}>Tidak ada masalah sosial</option>
-                    <option value="slightly_prob" {% if request.form.masalah_sosial == 'usual' %}selected{% endif %}>Masalah sosial ringan</option>
-                    <option value="problematic" {% if request.form.masalah_sosial == 'usual' %}selected{% endif %}>
+                    <option value="non-prob" {% if request.form.masalah_sosial == 'non-prob' %}selected{% endif %}>Tidak ada masalah sosial</option>
+                    <option value="slightly_prob" {% if request.form.masalah_sosial == 'slightly_prob' %}selected{% endif %}>Masalah sosial ringan</option>
+                    <option value="problematic" {% if request.form.masalah_sosial == 'problematic' %}selected{% endif %}>
                       Masalah sosial yang cukup serius
                     </option>
                   </select>
@@ -197,13 +197,13 @@
                     <option value="" disabled {% if not request.form.kesehatan %}selected{% endif %}>
                       Pilih Kesehatan anak
                     </option>
-                    <option value="recommended" {% if request.form.kesehatan == 'usual' %}selected{% endif %}>
+                    <option value="recommended" {% if request.form.kesehatan == 'recommended' %}selected{% endif %}>
                       Anak dalam kondisi kesehatan baik
                     </option>
-                    <option value="priority" {% if request.form.kesehatan == 'usual' %}selected{% endif %}>
+                    <option value="priority" {% if request.form.kesehatan == 'priority' %}selected{% endif %}>
                       Anak memiliki kebutuhan prioritas kesehatan
                     </option>
-                    <option value="not_recom" {% if request.form.kesehatan == 'usual' %}selected{% endif %}>
+                    <option value="not_recom" {% if request.form.kesehatan == 'not_recom' %}selected{% endif %}>
                       Kondisi kesehatan anak tidak direkomendasikan
                     </option>
                   </select>
@@ -219,11 +219,14 @@
 
       {% if prediction is not none %}
       <div class="d-flex justify-content-center mb-3">
-        <div class="kotak-fix" style="height: 160px; width: 500px">
-          <h2 class="judul-tabel mt-3">Hasil Prediksi: {{ prediction }}</h2>
+        <div class="kotak-fix" style="height: 120px; width: 500px">
+          <h2 class="judul-tabel mt-3">Hasil Prediksi : {{ prediction }}</h2>
         </div>
       </div>
       {% endif %}
+      <a href="/" class="submitt p-2 w-25 rounded-3 mb-3" type="submit"
+      >Training Ulang</a
+    >
     </div>
     <div class="overlay"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
