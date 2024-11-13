@@ -25,14 +25,14 @@
     <title>KNN Classifier</title>
   </head>
   <body>
-    <div class="container text-center">
+    <div class="container text-center mb-3">
       <div class="row mt-3 mb-3">
         <h1 class="nama-aplikasi">Prediksi Penerimaan Siswa TK</h1>
       </div>
       <form class="mt-3" method="POST" enctype="multipart/form-data">
         <div class="d-flex justify-content-center mb-3">
           <div class="col-md-6 w-100">
-            <div class="col overflow-auto kotak-fix" style="height: 450px">
+            <div class="col overflow-auto kotak-fix" style="height: auto">
               <h3 class="judul-tabel pt-2 mt-1">Input Opsi-opsi Berikit Ini</h3>
               <div class="row m-3">
                 <!-- Kiri -->
@@ -209,7 +209,7 @@
                   </select>
                 </div>
                 <div class="fix">
-                  <button type="submit" class="btn btn-primary">Button</button>
+                  <button type="submit" class="submitt p-2 px-3 rounded-3">Button</button>
                 </div>
               </div>
             </div>
@@ -219,12 +219,12 @@
 
       {% if prediction is not none %}
       <div class="d-flex justify-content-center mb-3">
-        <div class="kotak-fix" style="height: 120px; width: 500px">
-          <h2 class="judul-tabel mt-3">Hasil Prediksi : {{ prediction }}</h2>
+        <div class="kotak-fix py-1 px-5" style="height:auto; width: auto">
+          <h2 class="judul-tabel mt-3">Hasil Prediksi : <p class="mt-2" style="font-style:italic">{{ prediction }}</p> </h2>
         </div>
       </div>
       {% endif %}
-      <a href="/" class="submitt p-2 w-25 rounded-3 mb-3" type="submit"
+      <a href="/" class="submitt p-2 px-5 rounded-3 mb-3"  style="text-decoration:none"
       >Training Ulang</a
     >
     </div>

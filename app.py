@@ -67,7 +67,7 @@ def index():
 
     return render_template('index.html', result=result, training_data=training_data, testing_data = testing_data, zip=zip)
 
-@app.route("/option", methods=['GET', 'POST'])
+@app.route("/prediksi", methods=['GET', 'POST'])
 def option():
     prediction = None
     if request.method == 'POST':
