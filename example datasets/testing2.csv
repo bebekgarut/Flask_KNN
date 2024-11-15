@@ -1,9 +1,0 @@
-pretentious,less_proper,completed,3,less_conv,inconv,slightly_prob,priority,priority
-pretentious,less_proper,completed,3,less_conv,inconv,slightly_prob,not_recom,not_recom
-pretentious,less_proper,completed,3,less_conv,inconv,problematic,recommended,priority
-pretentious,less_proper,completed,3,less_conv,inconv,problematic,priority,priority
-pretentious,less_proper,completed,3,less_conv,inconv,problematic,not_recom,not_recom
-usual,proper,complete,1,convenient,inconv,problematic,priority,priority
-usual,less_proper,foster,2,critical,convenient,slightly_prob,recommended,priority
-usual,less_proper,foster,2,critical,convenient,slightly_prob,recommended,priority
-great_pret,very_crit,foster,more,convenient,inconv,nonprob,priority,spec_prior

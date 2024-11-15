@@ -10,13 +10,12 @@ knn = None
 onehot_enc = None
 
 def knn_classification(train_data, test_data, k):
-    global knn, onehot_enc
     
-    X_train = train_data.iloc[:, :-1]  # Atribut Training
-    y_train = train_data.iloc[:, -1]   # Label Traning
+    X_train = train_data.iloc[:, :-1] 
+    y_train = train_data.iloc[:, -1]  
 
-    X_test = test_data.iloc[:, :-1]  # Atribut Testing
-    y_test = test_data.iloc[:, -1]   # Label Testing
+    X_test = test_data.iloc[:, :-1]
+    y_test = test_data.iloc[:, -1] 
 
     onehot_enc = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
 
